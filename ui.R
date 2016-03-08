@@ -25,7 +25,8 @@ fluidPage(
       
       checkboxInput("header", "First Row as Header?", value = TRUE),
       
-      submitButton()
+      actionButton("parse_text" ,
+                   "Parse the text")
       )
     ),
     tableOutput("df")

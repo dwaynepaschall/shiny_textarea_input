@@ -7,16 +7,23 @@
 
 library(shiny)
 library(readr)
+
+
 shinyServer(function(input, output) {
    
-  output$df <- renderTable({
-    
+  parsed_df <- eventReactive(input$parse_text, {
     raw <- input$text_input
     
     read_delim(raw, 
                delim = input$delim, 
                col_names = input$header)
     
+    
+  })
+  
+  output$df <- renderTable({
+    #if(is.null(parsed_df)) return()
+    parsed_df()
   })
   
 })
